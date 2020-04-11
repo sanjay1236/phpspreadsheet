@@ -1,0 +1,32 @@
+My earlier php code with phpexcel are not working now giving error of deprecated So I tried to transfer all codes to phpspreadsheet I downloaded zip of phpspreadsheet from php-download.com I received folder vendor with sub folders as
+
+I changed my code as
+
+    require_once 'vendor/autoload.php';
+    use vendor\phpoffice\PhpSpreadsheet\src\PhpSpreadsheet\IOFactory;
+    use vendor\PhpOffice\PhpSpreadsheet\src\PhpSpreadsheet\Writer\Xlsx;
+
+    $spreadsheet = PhpOffice\PhpSpreadsheet\IOFactory::load("Blanksheet/blank_pffile.xlsx");
+    $spreadsheet->setActiveSheetIndex(0);
+my end code is
+
+    $xlsFile = 'temp.xlsx';
+    ob_clean();
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header("Content-Disposition: attachment;filename=$xlsFile");
+    header('Cache-Control: max-age=0');
+
+    $objWriter = IOFactory::createWriter($spreadsheet, $xlsFile);
+    $objWriter->save('php://output');
+    exit();
+In IOfactory.php is found in
+
+vendor\phpoffice\phpspreadsheet\src\phpspreadsheet
+
+I am getting error as follows
+
+Fatal error: Uncaught Error: Class 'phpoffice\PhpSpreadsheet\IOFactory' not found
+
+what should be the folders/sub folders and what is wrong in code Please help
+
+phpexcel phpspreadsheet
